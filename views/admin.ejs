@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    *{
+      margin: 0px;
+      padding: 0px;
+    }
+    
+    .cont{
+      background:white;
+      color:black;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .top{
+      width: 100vw;
+      height:11vh;
+      background:white;
+      border-bottom:0.7vh solid black;
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      align-items:bottom;
+      justify-content:left;
+      box-shadow: 0px 0px 10px #333,0px 0px 20px #555,0px 0px 30px #777;
+      z-index: 1;
+    }
+    .top .img{
+      width: 11vh;
+      height: 11vh;
+      border-radius:50%;
+      border: 0.6vh solid black;
+      margin:10px 15px;
+      background-image: url(img/mypic.png);
+      background-size:cover;
+      background-repeat: no-repeat;
+      box-shadow: 0px 0px 25px #333,0px 0px 10px #555;
+      position: relative;
+      z-index: 2;
+    }
+     .top h2{
+      margin:7vh 0vh;
+      font-family: cursive;
+      text-shadow: 0px 0px 20px #333,0px 0px 10px #555;
+    }
+    .top .nav{
+      width: 14vw;
+      height: 5vh;
+      background:white;
+      position: fixed;
+      top:3vh;
+      right:6vw;
+      max-width:70px;
+      max-height:60px;
+      min-width: 50px;
+      min-height: 45px;
+      border-radius:10px;
+      display:flex;
+      flex-direction: column;
+      justify-content:space-evenly;
+      align-items:center;
+      z-index: 5;
+      box-shadow: 0px 0px 20px #333,0px 0px 10px #555;
+    }
+    .top .nav .c{
+      width:70%;
+      height: 1px;
+      border:2px solid black;
+    }
+    
+      
+     .manu{
+       width:200px;
+       height:0px;
+       background:transparent;
+       position:fixed;
+       z-index:2;
+       top:10vh;
+       right: 3vw;
+       display:flex;
+      flex-direction: column;
+      justify-content:space-evenly;
+      align-items:center;
+      border-radius: 10px;
+      
+     }
+     .manu .ch{
+       width: 95%;
+       height: 30px;
+       background:white;
+       border-radius: 10px;
+       box-shadow: 0px 0px 20px #333,0px 0px 10px #555;
+       color:black;
+       font-size: 0px;
+       flex-shrink:1;
+       display:flex;
+      flex-direction: column;
+      justify-content:space-evenly;
+      align-items:center;
+     }
+     .ch a{
+       color:black;
+       text-decoration: none;
+     }
+    
+    .game1{
+      width:97vw;
+      height: 150px;
+      color:black;
+      background:white;
+      border-radius:20px;
+      margin-top: 15vh;
+      text-align: center;
+      box-shadow: 0px 0px 20px #333;
+    }
+    .game1 table{
+      border: 1px solid black;
+      margin:7px 5%;
+      width: 90%;
+      border-radius: 5px;
+    }
+    .game1 table td{
+      border: 1px solid black;
+      width: 50%;
+     height: 45px;
+     text-align: center;
+    }
+     .game1 table td input{
+      background: transparent;
+      width: 50px;
+      height: 30px;
+      border: none;
+      text-align: center;
+      font-weight: bolder;
+      font-size: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div class="cont" >
+  
+
+  
+  
+  <div class="top" >
+    <div class="img"></div>
+    <h2>~hello GC</h2>
+
+    <div class="nav" onclick="an()">
+      <div class="c"></div>
+      <div class="c"></div>
+      <div class="c"></div>
+    </div>
+      <div class="manu" id="manu">
+    <div class="ch"> <a href="https://hellogc360.github.io/tiktaktok/">TikTakTok </a></div>
+    <div class="ch"><a href="https://www.gecvaishali.ac.in/">GEC vaishali</a></div>
+    <div class="ch"><a href="https://github.com/helloGC360">My github</a></div>
+    <div class="ch"><a href="https://www.youtube.com/@gcHello">My YouTube</a></div>
+    <div class="ch"><a href="https://x.com/helloGChii">My Twitter</a></div>
+
+  </div>
+  </div>
+  <div class="game1">
+    <h2>chess</h2><hr>
+    <table>
+     <tr>
+       <td>GECV score</td>
+       <td>other</td>
+     </tr>
+     <tr>
+       <td><input type="number" id="gs"value="0"></td>
+       <td><input value="0" type="number"id="os"></td>
+     </tr>
+     </table>
+     <button onclick="score()">publish</button>
+  </div>
+   
+  </div>
+  
+  
+  
+  
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+
+
+
+const manu=document.getElementById('manu');
+const nav=document.getElementsByClassName('nav');
+const ch=document.getElementsByClassName('ch');
+
+var n=ch.length;
+let k=1;
+  function an(){
+    if(k==1){
+      manu.style=`width:200px;height:${n*35}px;transition:0.5s`;
+      nav[0].style="background:#555;transition:0.5s";
+      for(let i=0;i<n;i++){
+        ch[i].style="font-size:15px;transition:0.3s"
+      }
+      
+      k=0;
+    }else{
+      manu.style='height:00px;width:10px;top:4vh;right:10vw;transition:0.5s';
+      nav[0].style="background:white;transition:0.5s";
+      for(let i=0;i<n;i++){
+        ch[i].style="font-size:0px;transition:0.3s"
+      }
+      k=1;
+    }
+    }
+    
+
+
+const gs=document.getElementById('gs');
+const os=document.getElementById('os');
+
+    function score(){
+      let scdata={
+        gs:gs.value,
+        os:os.value
+      }
+     socket.emit("scdata",scdata);
+     }
+    
+   
+    </script>
+</body>
+
+</html>
